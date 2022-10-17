@@ -76,7 +76,7 @@
 
 		</tr><br>
 		<?php
-		$connection = mysqli_connect("", "", "");
+		$connection = mysqli_connect("localhost", "root", "");
 		$db = mysqli_select_db($connection, 'project1');
 		if (isset($_POST['search'])) {
 			$UID = $_POST['UID'];

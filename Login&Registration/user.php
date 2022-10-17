@@ -6,7 +6,7 @@ require_once('..\PDF\EmbedPdfLibrary.php');
 //Audio Library
 require_once('..\EncryptionAndDecryption\aes.php');
 require 'KeyGeneration.php';
-require 'C:Path to Composer Autoload php File';
+require '..\vendor\autoload.php';
 
 include('functions.php');
 
@@ -27,7 +27,7 @@ $username = $_SESSION['username'];
 
 
 // Fetching UID number
-$conn = mysqli_connect("", "", "");
+$conn = mysqli_connect("localhost", "root", "");
 mysqli_select_db($conn, "project1");
 $sql = "Select UID from users where username='$username'";
 $result = mysqli_query($conn, $sql);

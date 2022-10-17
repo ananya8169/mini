@@ -1,5 +1,5 @@
 <?php
-require 'C:Path to Composer Autoload php File';
+require '..\vendor\autoload.php';
 
 if(isset($_POST['Delete'])){
 
@@ -17,7 +17,7 @@ $credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
 	
 	
 	// Fetching Source User UID number
-	$conn = mysqli_connect("","","");//Your Database info here
+	$conn = mysqli_connect("localhost","root","");//Your Database info here
 	mysqli_select_db($conn,"project1");
 	$sql = "Select UID from users where username='$username'";
 	$result = mysqli_query($conn,$sql);

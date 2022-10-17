@@ -68,7 +68,7 @@
 					require_once('..\PDF\EmbedPdfLibrary.php');
 					require_once('..\EncryptionAndDecryption\aes.php');
 					require 'KeyGeneration.php';
-					require 'Path to composer autoload.php';
+					require 'vendor\autoload.php';
 					include('functions.php');
 
 					if (isset($_POST['submit'])) {

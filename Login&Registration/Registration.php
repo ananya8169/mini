@@ -1,8 +1,8 @@
 <?php
-require 'Path to composer autoload.php';
+require '..\vendor\autoload.php';
 // S3 Handshake
 
-$credentials = new Aws\Credentials\Credentials('Your AWS Credentials');
+$credentials = new Aws\Credentials\Credentials('YOUR_ACCESS_KEY', 'YOUR_SECRET_KEY');
 					$s3 = new Aws\S3\S3Client([//create s3 cient
 					    'version'     => 'latest',
 					    'region'      => 'Your AWS Region',
@@ -11,10 +11,10 @@ $credentials = new Aws\Credentials\Credentials('Your AWS Credentials');
 	
 
 	if($_SERVER['REQUEST_METHOD']=="GET"){
-			$localhost = "";
-		$username = "";
+			$localhost = "localhost";
+		$username = "root";
 		$password = "";
-		$db = "";
+		$db = "project1";
 		
 		$name = $_GET['name'];
 		$user = $_GET['user'];

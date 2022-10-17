@@ -2,7 +2,7 @@
 session_start();
 $_SESSION["username"] = $_POST["user"];
 
-$conn = mysqli_connect("localhost:3306", "root", "3695"); //Your Database info here
+$conn = mysqli_connect("localhost", "root", ""); //Your Database info here
 mysqli_select_db($conn, "project1");
 $selectquery = "select * from users";
 $selectqueryexec = mysqli_query($conn, $selectquery);

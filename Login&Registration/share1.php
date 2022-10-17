@@ -1,7 +1,7 @@
 <?php
 
 //Libraries Section
-require 'C:Path to Composer Autoload php File';
+require '..\vendor\autoload.php';
 require_once('..\EncryptionAndDecryption\aes.php');  //Encryption Library
 include('functions.php');  //Image Library
 require_once('..\PDF\EmbedPdfLibrary.php'); //PDF Library
@@ -31,7 +31,7 @@ if (isset($_POST['Share'])) {
 
 
 		// Fetching Source User UID number
-		$conn = mysqli_connect("", "", "");
+		$conn = mysqli_connect("localhost", "root", "");
 		mysqli_select_db($conn, "project1");
 		$sql = "Select UID from users where username='$username'";
 		$result = mysqli_query($conn, $sql);

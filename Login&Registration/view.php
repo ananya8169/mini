@@ -124,7 +124,7 @@
   <?php
   //S3 Handshake
   //S3 Handshake
-  require 'C:Path to Composer Autoload php File';
+  require 'vendor\autoload.php';
   $credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
 
   $s3 = new Aws\S3\S3Client([
@@ -139,8 +139,8 @@
 
 
     // Fetching UID number
-    $conn = mysqli_connect("", "", "");
-    mysqli_select_db($conn, "dbname");
+    $conn = mysqli_connect("localhost", "root", "");
+    mysqli_select_db($conn, "project1");
     $sql = "Select UID from users where username='$username'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) != 0) {
