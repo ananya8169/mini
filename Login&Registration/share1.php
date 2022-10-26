@@ -17,7 +17,7 @@ if (isset($_POST['Share'])) {
 
 		//S3 Handshake
 
-		$credentials = new Aws\Credentials\Credentials('AKIASU53LD6JEZQLWFFQ','pD1G9bjNpTSRPltIxdTej+zlEv4mjqHX1e+gI4cc');
+		$credentials = new Aws\Credentials\Credentials('','');
 
 		$s3 = new Aws\S3\S3Client([
 			'version'     => 'latest',
