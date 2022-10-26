@@ -4,12 +4,12 @@ require_once('..\EncryptionAndDecryption\aes.php');
 require 'KeyGeneration.php';
 if(isset($_POST['Download'])){
 
-$credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
+$credentials = new Aws\Credentials\Credentials('AKIASU53LD6JEZQLWFFQ','pD1G9bjNpTSRPltIxdTej+zlEv4mjqHX1e+gI4cc');
 
 
 	$s3 = new Aws\S3\S3Client([
 	    'version'     => 'latest',
-	    'region'      => 'Your region here',
+	    'region'      => 'ap-south-1',
 	    'credentials' => $credentials
 	]);	
 
@@ -30,7 +30,7 @@ $credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
 	$filename = $_POST['varname'];
 //Download File from Cloud Code
 	$s3->getObject(array(
-    'Bucket' => 'user'.$source_uid,
+    'Bucket' => 'user-bucket'.$source_uid,
     'Key'    => $filename,
     'ResponseContentDisposition' => 'attachment; filename="'.$filename.'"',
     'SaveAs' => 'Download/'.$filename

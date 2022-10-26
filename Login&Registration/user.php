@@ -13,11 +13,11 @@ include('functions.php');
 //S3 Handshake
 
 
-$credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
+$credentials = new Aws\Credentials\Credentials('AKIASU53LD6JEZQLWFFQ','pD1G9bjNpTSRPltIxdTej+zlEv4mjqHX1e+gI4cc');
 
 $s3 = new Aws\S3\S3Client([
 	'version'     => 'latest',
-	'region'      => 'Your region here',
+	'region'      => 'ap-south-1',
 	'credentials' => $credentials
 ]);
 
@@ -51,6 +51,7 @@ if (mysqli_num_rows($result) != 0) {
 		if ($ext == "pdf") {
 			//Embedding data section
 			$binary = encodeUID($uid);
+			echo "<h3>binary</h3>".$binary;
 			$embed_data = makeUIDPdf($binary);
 			embedPdf($pdfsrc, $embed_data);
 			//echo "<br> PDF File uploaded";
@@ -67,13 +68,13 @@ if (mysqli_num_rows($result) != 0) {
 
 		try { //putting an object
 			$result = $s3->putObject([
-				'Bucket' => 'user' . $uid,
+				'Bucket' => 'user-bucket' . $uid,
 				'Key'    => $uid . "_" . $file_name . '.encrypt',
 				'SourceFile' => $encryptedFile
 			]);
 			$message = "File Uploaded!";
 			echo "<script type='text/javascript'>alert('$message');</script>";
-		} catch (S3Exception $e) {
+		} catch (Aws\S3\Exception\S3Exception $e) {
 			echo $e->getMessage() . PHP_EOL;
 		}
 	}

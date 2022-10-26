@@ -96,8 +96,8 @@
     .jumbotron {
       margin-left: auto;
       margin-right: auto;
-      margin-top:
-        background-color: #fefefe;
+      margin-top: auto;
+      background-color: #fefefe;
       color: white;
       border-radius: 5%;
       text-align: center;
@@ -117,6 +117,10 @@
       vertical-align: top;
 
     }
+
+    .button-solid {
+      border: none;
+    }
   </style>
 </head>
 
@@ -124,12 +128,12 @@
   <?php
   //S3 Handshake
   //S3 Handshake
-  require 'vendor\autoload.php';
-  $credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
+  require '..\vendor\autoload.php';
+  $credentials = new Aws\Credentials\Credentials('AKIASU53LD6JEZQLWFFQ', 'pD1G9bjNpTSRPltIxdTej+zlEv4mjqHX1e+gI4cc');
 
   $s3 = new Aws\S3\S3Client([
     'version'     => 'latest',
-    'region'      => 'your AWS region',
+    'region'      => 'ap-south-1',
     'credentials' => $credentials
   ]); {
     //Session 
@@ -151,7 +155,7 @@
     //Retrieve Files
     try {
       $objects = $s3->getIterator('ListObjects', array(
-        'Bucket' => 'user' . $uid
+        'Bucket' => 'user-bucket' . $uid
         //'Prefix' => 'files/' to indicate a folder
       ));
   ?>
@@ -183,11 +187,23 @@
           $array = explode("_", $tagit);
           echo "<tr><td colspan='2'>";
           echo $array[1];
-          echo "</td><td><form name='share' method='POST' action='share1.php' enctype = 'multipart/form-data'><input type='hidden' name='varname' value=$tagit /></td><td><input type='text' name='target_user' placeholder='Enter Username for sharing file'/></td><td><input type='submit' value='share' name='Share'></form></td><td><form name='delete' method='POST' action='delete.php' enctype = 'multipart/form-data'><input type='hidden' name='varname' value=$tagit /><input type='submit' value='Delete' name='Delete'></form></td><td><form name='download' method='POST' action='download.php' enctype = 'multipart/form-data'><input type='hidden' name='varname' value=$tagit /><input type='submit' value='Download' name='Download'></form></td></tr>";
+          echo "</td><td><form name='share' method='POST' action='share1.php' enctype = 'multipart/form-data'><input type='hidden' name='varname' value=$tagit /></td>
+          <td><input type='text' name='target_user' placeholder='Enter Username for sharing file'/></td>
+          <td><input type='submit' value='Share' name='Share'></form></td>
+          <td><form name='delete' method='POST' action='delete.php' enctype = 'multipart/form-data'>
+            <input type='hidden' name='varname' value=$tagit />
+            <br>
+            <input type='submit' name='Delete' value='Delete' />
+            </form></td>
+          <td><form name='download' method='POST' action='download.php' enctype = 'multipart/form-data'>
+            <input type='hidden' name='varname' value=$tagit />
+            <br>
+            <input type='submit' value='Download' name='Download'>
+            </form></td></tr>";
           echo "<br>";
         }
         echo "</table>";
-      } catch (S3Exception $e) {
+      } catch (Aws\S3\Exception\S3Exception $e) {
         echo $e->getMessage() . PHP_EOL;
       }
     }

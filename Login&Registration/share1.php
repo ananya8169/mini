@@ -17,11 +17,11 @@ if (isset($_POST['Share'])) {
 
 		//S3 Handshake
 
-		$credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
+		$credentials = new Aws\Credentials\Credentials('AKIASU53LD6JEZQLWFFQ','pD1G9bjNpTSRPltIxdTej+zlEv4mjqHX1e+gI4cc');
 
 		$s3 = new Aws\S3\S3Client([
 			'version'     => 'latest',
-			'region'      => 'Your AWS Region',
+			'region'      => 'ap-south-1',
 			'credentials' => $credentials
 		]);
 
@@ -49,13 +49,13 @@ if (isset($_POST['Share'])) {
 		}
 
 		$filename = $_POST['varname'];
-		$sourceBucket = 'user' . $source_uid; //bucket of user who is sharing
+		$sourceBucket = 'user-bucket' . $source_uid; //bucket of user who is sharing
 		$sourceKeyname = $filename; //file name
-		$targetBucket = 'user' . $target_uid; //bucket of reciever
+		$targetBucket = 'user-bucket' . $target_uid; //bucket of reciever
 
 		//Download File from Cloud Code
 		$s3->getObject(array(
-			'Bucket' => 'user' . $source_uid,
+			'Bucket' => 'user-bucket' . $source_uid,
 			'Key'    => $filename,
 			'ResponseContentDisposition' => 'attachment; filename="' . $filename . '"',
 			'SaveAs' => 'UploadedFiles/' . $filename
@@ -88,7 +88,7 @@ if (isset($_POST['Share'])) {
 					'Key'    => $sourceKeyname,
 					'SourceFile' => $encryptedFilepdf
 				]);
-			} catch (S3Exception $e) {
+			} catch (Aws\S3\Exception\S3Exception $e) {
 				echo $e->getMessage() . PHP_EOL;
 			}
 			$message = "Your File has been Shared!";

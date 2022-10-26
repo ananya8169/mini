@@ -2,10 +2,10 @@
 require '..\vendor\autoload.php';
 // S3 Handshake
 
-$credentials = new Aws\Credentials\Credentials('YOUR_ACCESS_KEY', 'YOUR_SECRET_KEY');
+$credentials = new Aws\Credentials\Credentials('AKIASU53LD6JEZQLWFFQ', 'pD1G9bjNpTSRPltIxdTej+zlEv4mjqHX1e+gI4cc');
 					$s3 = new Aws\S3\S3Client([//create s3 cient
 					    'version'     => 'latest',
-					    'region'      => 'Your AWS Region',
+					    'region'      => 'ap-south-1',
 					    'credentials' => $credentials
 					]);	
 	
@@ -41,17 +41,17 @@ $credentials = new Aws\Credentials\Credentials('YOUR_ACCESS_KEY', 'YOUR_SECRET_K
 				if(mysqli_num_rows($result)!=0){
 					while($row = mysqli_fetch_assoc($result))
 						$uid = $row['UID'];
-				//echo $uid;		
+				echo $uid;		
 				}
 
 			//Bucket creation code
 				
-				$BUCKET_NAME = "user".$uid;
+				$BUCKET_NAME = 'user-bucket'.$uid;
 				try {//create new bucket
 				    $result = $s3->createBucket([
 				        'Bucket' => $BUCKET_NAME,
 				   ]);
-				} catch (AwsException $e) {
+				} catch (Aws\Exception\AwsException $e) {
 					echo $e->getMessage() . PHP_EOL;
 				}
 				include("Admin.html");

@@ -56,12 +56,20 @@
 			$lastline = fgets($f);
 		}
 		$data="";
-		for($i=0;$i<strlen($lastline);$i=$i+2){
-			if($lastline[$i]=='\\' and $lastline[$i+1]=='n')
-				$data .= '0';
-			else
-				$data .= '1';
+		// echo "<h3>lastline</h3>".$lastline;
+		// echo "<h3> length </h3>".strlen($lastline);
+		// $lastline="\n\n\n\t\t\n";
+		for($i=0;$i<strlen($lastline);$i=$i+1){
+			// if($lastline[$i]=='\t' and $lastline[$i+1]=='\n')
+			// 	$data .= '0';
+			// else
+			// 	$data .= '1';
+			if($lastline[$i] =='\\' && $lastline[$i+1]=='n')
+					$data .= '0';
+			if ($lastline[$i] =='\\' && $lastline[$i+1]=='t')
+					$data .= '1';
 		}
+		// echo "<h3>PDF data</h3>".$data;
 		return $data;
 	}
 	
@@ -77,6 +85,7 @@
 				$digit=0;
 				for($k=$j,$pos=0; $pos<4 ;$k++,$pos++){
 					if($data[$k]==1){
+						// echo"<h6>digit</h6>".$digit;
 						$digit = $digit+$power[$pos];
 					}
 				}

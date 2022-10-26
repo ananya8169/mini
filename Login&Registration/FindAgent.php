@@ -68,7 +68,7 @@
 					require_once('..\PDF\EmbedPdfLibrary.php');
 					require_once('..\EncryptionAndDecryption\aes.php');
 					require 'KeyGeneration.php';
-					require 'vendor\autoload.php';
+					require '..\vendor\autoload.php';
 					include('functions.php');
 
 					if (isset($_POST['submit'])) {
@@ -84,13 +84,15 @@
 
 						$ext = pathinfo($file_name, PATHINFO_EXTENSION);
 						$pdfsrc = "LeakedFiles/" . $file_name;
+						// echo "<br> pdfsrc </h3>".$pdfsrc;
 
 						// Process
 						//PDF 
-
-						if ($ext == 'pdf' || $ext == 'mp4') {
-
+						// echo "<h3> Extension</h3>".$ext;
+						if ($ext == 'pdf' || $ext=='encrypt') {
+							// echo "<h3> Entered</h3>";
 							$data = extractPdfData($pdfsrc);
+							// echo "<br><h3> Data </h3>".$data;
 							$list = findUID($data);
 
 							// Display List
@@ -101,10 +103,11 @@
 
 							$len = count($list);
 							if ($len > 2) {
-								echo "<br><br> <h2> Leaked Agent : ";
+								echo "<br><br> <h2> Leaked Agent : </h2>";
 								echo $list[1];
 							}
 						}
+					}
 					?>
 				</div>
 			</div>

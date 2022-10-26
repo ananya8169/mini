@@ -3,11 +3,11 @@ require '..\vendor\autoload.php';
 
 if(isset($_POST['Delete'])){
 
-$credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
+$credentials = new Aws\Credentials\Credentials('AKIASU53LD6JEZQLWFFQ','pD1G9bjNpTSRPltIxdTej+zlEv4mjqHX1e+gI4cc');
 
 	$s3 = new Aws\S3\S3Client([
 	    'version'     => 'latest',
-	    'region'      => 'Your region here',
+	    'region'      => 'ap-south-1',
 	    'credentials' => $credentials
 	]);	
 
@@ -26,7 +26,7 @@ $credentials = new Aws\Credentials\Credentials('Your secret AWS Key and ID');
 			$uid = $row['UID'];
 	}
 $filename = $_POST['varname'];
-	$sourceBucket = 'user'.$uid;
+	$sourceBucket = 'user-bucket'.$uid;
 	$sourceKeyname = $filename;//file name
 
 $s3->deleteObject([
